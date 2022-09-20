@@ -1,88 +1,98 @@
 
-public class ArrayList<A>{
-    private A[] array;
+public class ArrayList {
+    private String[] data;
     private int size;
 
-    public ArrayList(int size) {
-        array = (A[])new Object[size];
+    public ArrayList(){
+        data = new String[2];
     }
 
-    public void addAtTail(A data) {
+    public void addAtTail(String data){
+        if(size == data.length()){
+            increaseArraySize();
+        }
 
-        if(data == null){
-            return;
-        }
-        if(size == array.length) {
-           size++;
-        }
-        array[size] = data;
+        this.data[size] = data;
+        this.size++;
     }
 
-    public void addAtFront(A data) {
-        if(data == null){
-            return;
-        }
-        if(size == array.length){
-            size++;
+    public void increaseArraySize(){
+        String []newArray = new String[this.data.length *2];
+
+        for(int i=0; i<data.length; i++){
+            newArray[i]= data[i];
         }
 
-        if(size >= 0){
-            System.arraycopy(array, 0, array, 1 , size);
+        data = newArray;
+    }
+
+    public void addAtFront(String data){
+        if(size ==this.data.length){
+            increaseArraySize();
         }
-        array[0] = data;
+
+        for(int i = size; i>0; i--){
+            this.data[i] = this.data[i-1];
+        }
+
+        this.data[0] = data;
         size++;
     }
 
-    public boolean remove(int indexToRemove){
-        if(indexToRemove <0 || indexToRemove >= size){
+    public boolean setAt(int index, String data){
+        if(index < 0 || index>=size){
             return false;
         }
-
-        if(array.length > indexToRemove){
-
-        }
-
-        size--;
+        this.data[index] = data;
         return true;
     }
 
+    public String getAt(int index){
+        if(index < 0 || index>=size){
+            return null;
+        }
 
-    public void removeAll(){
-        for (int i=0; i<size; i++){
-            array[i] = null;
+        return this.data[index];
+    }
+
+    public boolean remove(int indexToRemove){
+        if(indexToRemove < 0 || indexToRemove >= size ){
+            return false;
+        }
+        for(int i= indexToRemove; i<size; i++){
+            data[i] = data[i+1];
+        }
+        size--;
+        data[size] = null;
+        return true;
+    }
+
+    public void removeAll(String value){
+        for(int i=0; i<size; i++){
+            data[i]=null;
         }
         size=0;
     }
 
-    public void removeAllWithValue(String data){
+    public void removeAllWithValue(String value){
+        String []newArray = new String[data.length];
+        int count=0;
+
+
         for(int i=0; i<size; i++){
-            if(array[i] == data){
-                array[i] = null;
+            if(!data[i].equals(value)){
+                newArray[count++] = data[i];
             }
         }
-    }
 
-    public boolean setAt(int index, A data){
-        if(index < 0 || index >= size){
-            return false;
-        }else{
-            array[index] = data;
-            return true;
-        }
+        this.data = newArray;
+        size=count;
     }
-
-    public boolean getAt(int index){
-        if(index < 0 || index >= size){
-            return false;
-        }
-        return true;
-    }
-
     public int getSize(){
         return size;
     }
 
-    public int getIterator(){
-        return 1;
+    public ArrayListIterator getIterator(){
+        return new ArrayListIterator(this);
     }
 }

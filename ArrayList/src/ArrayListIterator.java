@@ -1,19 +1,17 @@
-public class ArrayListIterator<A>{
-    private ArrayList<A> arrayList;
-    private int arrayIterator;
-    private boolean data;
 
-    public ArrayListIterator(ArrayList<A> arrayList){
-        this.arrayList= arrayList;
-    }
+public class ArrayListIterator {
+        private ArrayList arrayList;
+        private int currentIndex =0;
 
-    public boolean hasNext(){
-        return arrayIterator < arrayList.getSize();
-    }
+        public ArrayListIterator(ArrayList arrayList){
+            this.arrayList = arrayList;
+        }
 
-    public boolean Next(){
-        data = arrayList.getAt(arrayIterator);
-        arrayIterator++;
-        return data;
-    }
+        public boolean hasNext() {
+            return currentIndex < arrayList.getSize();
+        }
+
+        public String next(){
+            return arrayList.getAt(currentIndex++);
+        }
 }
