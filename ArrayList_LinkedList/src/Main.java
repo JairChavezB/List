@@ -7,20 +7,18 @@ import uaslp.objetos.list.linkedlist.LinkedList;
 public class Main {
 
     public static void main(String[] args){
-        List lista1 = new ArrayList();
+        //List lista1 = new ArrayList();
         List lista2 = new LinkedList();
 
-        lista1.addAtTail("5");
-        lista1.addAtTail("1");
+        lista2.addAtTail("50");
+        lista2.addAtTail("20");
 
-        lista1.addAtFront("3");
-        lista1.addAtFront("2");
+        lista2.addAtFront("90");
+        lista2.addAtFront("40");
+        lista2.setAt(3,"10");
+        //lista2.removeAll();
 
-        lista1.removeAllWithValue("2");
-        lista1.remove(2);
-        lista1.setAt(1,"10");
-
-        Iterator iterator = lista1.getIterator();
+        Iterator iterator = lista2.getIterator();
 
         while(iterator.hasNext()){
             String value = iterator.next();
