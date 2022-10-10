@@ -44,10 +44,10 @@ public class LinkedList implements List {
 
 
 
-    private static class LinkedListIterator implements Iterator {
+    private class LinkedListIterator implements Iterator {
         private LinkedList.Node current;
 
-        public LinkedListIterator(LinkedList.Node head){
+        public LinkedListIterator(){
             this.current = head;
         }
 
@@ -178,7 +178,7 @@ public class LinkedList implements List {
     }
 
     public LinkedListIterator getIterator() {
-        return new LinkedListIterator(head);
+        return new LinkedListIterator();
     }
 }
 
