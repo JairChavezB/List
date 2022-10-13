@@ -1,13 +1,12 @@
 import uaslp.objetos.list.Iterator;
-import uaslp.objetos.list.List; 
+import uaslp.objetos.list.List;
 import uaslp.objetos.list.arraylist.ArrayList;
-import uaslp.objetos.list.arraylist.ArrayListIterator;
 import uaslp.objetos.list.linkedlist.LinkedList;
 
 public class Main {
 
     public static void main(String[] args){
-        List lista2 = new LinkedList();
+        List lista2 = new ArrayList();
 
         lista2.addAtTail("50");
         lista2.addAtTail("20");

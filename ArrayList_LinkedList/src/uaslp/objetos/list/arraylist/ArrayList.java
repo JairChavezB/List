@@ -1,5 +1,5 @@
 package uaslp.objetos.list.arraylist;
-
+import uaslp.objetos.list.Iterator;
 import uaslp.objetos.list.List;
 
 public class ArrayList implements List {
@@ -95,7 +95,19 @@ public class ArrayList implements List {
         return size;
     }
 
-    public ArrayListIterator getIterator(){
-        return new ArrayListIterator(this);
+    public Iterator getIterator(){
+        return new Iterator() {
+
+            private int currentIndex =0;
+            @Override
+            public boolean hasNext() {
+                return currentIndex < size;
+            }
+
+            @Override
+            public String next() {
+                return data[currentIndex++];
+            }
+        };
     }
 }
