@@ -1,5 +1,7 @@
 package uaslp.objetos.list;
 
+import uaslp.objetos.list.Iterator;
+
 public interface List {
 
     void addAtTail (String data);

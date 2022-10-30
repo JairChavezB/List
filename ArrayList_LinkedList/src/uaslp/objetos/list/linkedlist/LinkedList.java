@@ -1,9 +1,10 @@
 package uaslp.objetos.list.linkedlist;
+
+
 import uaslp.objetos.list.Iterator;
 import uaslp.objetos.list.List;
 
-
-public class LinkedList implements List {
+public class LinkedList<S> implements List {
     private Node head;
     private Node tail;
     private int size;
@@ -82,14 +83,17 @@ public class LinkedList implements List {
     }
 
     public void addAtFront(String data) {
-        if (head == null) {
-            head = new Node(data);
+        Node node = new Node(data);
+        node.next = head;
+        head = node;
+
+        if (tail == null) {
+            tail = node;
         } else {
-            Node node = new Node(data);
-            node.setNext(head);
-            head = node;
-            size++;
+            node.next.previous =node;
         }
+
+        size++;
 
     }
 
@@ -134,10 +138,20 @@ public class LinkedList implements List {
                 if (current == head) {
                     head = current.getNext();
                     if (head == null) {
-
+                        tail = null;
+                    }else{
+                        head.previous = null;
+                    }
+                }else{
+                    current.previous.next = current.next;
+                    if(current == tail){
+                        tail = current.previous;
+                    }else{
+                        current.next.previous = current.previous;
                     }
                 }
             }
+            current = current.next;
         }
     }
 
