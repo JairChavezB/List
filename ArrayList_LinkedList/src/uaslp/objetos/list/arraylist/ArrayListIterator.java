@@ -1,21 +1,20 @@
 package uaslp.objetos.list.arraylist;
 
 import uaslp.objetos.list.Iterator;
-import uaslp.objetos.list.arraylist.ArrayList;
 
-public class ArrayListIterator implements Iterator {
-        private ArrayList arrayList;
-        private int currentIndex =0;
+public class ArrayListIterator<T> implements Iterator<T>{
+    private ArrayList<T> arrayList;
+    private int currentIndex =0;
 
-        public ArrayListIterator(ArrayList arrayList){
-            this.arrayList = arrayList;
-        }
+    public ArrayListIterator(ArrayList<T> arrayList){
+        this.arrayList = arrayList;
+    }
 
-        public boolean hasNext() {
-            return currentIndex < arrayList.getSize();
-        }
+    public boolean hasNext() {
+        return currentIndex < arrayList.getSize();
+    }
 
-        public String next(){
-            return arrayList.getAt(currentIndex++);
-        }
+    public T next(){
+        return arrayList.getAt(currentIndex++);
+    }
 }
