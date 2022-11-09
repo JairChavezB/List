@@ -3,6 +3,8 @@ package uaslp.objetos.list.linkedlist;
 
 import uaslp.objetos.list.Iterator;
 import uaslp.objetos.list.List;
+import uaslp.objetos.list.exceptions.NullNotAllowedException;
+import uaslp.objetos.list.exceptions.WrongIndexException;
 
 public class LinkedList<T> implements List<T> {
     private Node<T> head;
@@ -42,7 +44,10 @@ public class LinkedList<T> implements List<T> {
     }
 
 
-    public void addAtTail(T data) {
+    public void addAtTail(T data) throws NullNotAllowedException{
+        if( data == null){
+            throw new NullNotAllowedException();
+        }
         Node<T> node = new Node<>(data);
 
         node.previous = tail;
@@ -57,7 +62,10 @@ public class LinkedList<T> implements List<T> {
         size++;
     }
 
-    public void addAtFront(T data) {
+    public void addAtFront(T data) throws NullNotAllowedException{
+        if(data == null){
+            throw new NullNotAllowedException();
+        }
         Node<T> node = new Node<>(data);
 
         node.next = head;
@@ -72,10 +80,10 @@ public class LinkedList<T> implements List<T> {
         size++;
     }
 
-    public boolean remove(int indexToRemove) {
+    public boolean remove(int indexToRemove) throws WrongIndexException{
 
         if (indexToRemove < 0 || indexToRemove >= size) {
-            return false;
+            throw new WrongIndexException();
         }
 
         if (size == 1) {
@@ -105,9 +113,12 @@ public class LinkedList<T> implements List<T> {
         size = 0;
     }
 
-    public boolean setAt(int index, T data) {
+    public boolean setAt(int index, T data) throws WrongIndexException, NullNotAllowedException{
         if (index < 0 || index >= size) {
-            return false;
+            throw new WrongIndexException();
+        }
+        if(data == null){
+            throw new NullNotAllowedException();
         }
 
         Node<T> node = findNodeByIndex(index);
@@ -117,9 +128,9 @@ public class LinkedList<T> implements List<T> {
         return true;
     }
 
-    public T getAt(int index) {
+    public T getAt(int index) throws WrongIndexException{
         if (index < 0 || index >= size) {
-            return null;
+            throw new WrongIndexException();
         }
 
         Node<T> node = findNodeByIndex(index);
@@ -127,7 +138,11 @@ public class LinkedList<T> implements List<T> {
         return node.data;
     }
 
-    public void removeAllWithValue(T value) {
+    public void removeAllWithValue(T value) throws NullNotAllowedException {
+        if(value == null){
+            throw new NullNotAllowedException();
+        }
+
         Node<T> current = head;
 
         while (current != null) {
@@ -161,7 +176,10 @@ public class LinkedList<T> implements List<T> {
         return new LinkedListIterator();
     }
 
-    private Node<T> findNodeByIndex(int index) {
+    private Node<T> findNodeByIndex(int index) throws WrongIndexException{
+        if (index < 0 || index >= size) {
+            throw new WrongIndexException();
+        }
         Node<T> iteratorNode = head;
         int indexIteratorNode = 0;
 

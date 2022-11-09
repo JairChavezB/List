@@ -1,6 +1,8 @@
 package uaslp.objetos.list.arraylist;
 import uaslp.objetos.list.Iterator;
 import uaslp.objetos.list.List;
+import uaslp.objetos.list.exceptions.NullNotAllowedException;
+import uaslp.objetos.list.exceptions.WrongIndexException;
 
 public class ArrayList<T> implements List<T>{
     private T[] data;
@@ -12,7 +14,10 @@ public class ArrayList<T> implements List<T>{
     }
 
 
-    public void addAtTail(T data) {
+    public void addAtTail(T data) throws NullNotAllowedException{
+        if(data == null){
+            throw new NullNotAllowedException();
+        }
         if (size == this.data.length) {
             increaseArraySize();
         }
@@ -33,7 +38,12 @@ public class ArrayList<T> implements List<T>{
 
     }
 
-    public void addAtFront(T data) {
+    public void addAtFront(T data) throws NullNotAllowedException{
+
+        if (data == null) {
+            throw new NullNotAllowedException();
+        }
+
         if (size == this.data.length) {
             increaseArraySize();
         }
@@ -46,10 +56,10 @@ public class ArrayList<T> implements List<T>{
         size++;
     }
 
-    public boolean remove(int indexToRemove) {
+    public boolean remove(int indexToRemove) throws WrongIndexException{
 
         if (indexToRemove < 0 || indexToRemove >= size) {
-            return false;
+            throw new WrongIndexException();
         }
 
         for (int i = indexToRemove; i < size - 1; i++) {
@@ -69,9 +79,12 @@ public class ArrayList<T> implements List<T>{
 
     }
 
-    public boolean setAt(int index, T data) {
+    public boolean setAt(int index, T data) throws WrongIndexException, NullNotAllowedException{
         if (index < 0 || index >= size) {
-            return false;
+            throw new WrongIndexException();
+        }
+        if(data == null){
+            throw new NullNotAllowedException();
         }
 
         this.data[index] = data;
@@ -79,16 +92,19 @@ public class ArrayList<T> implements List<T>{
         return true;
     }
 
-    public T getAt(int index) {
+    public T getAt(int index) throws WrongIndexException{
         if (index < 0 || index >= size) {
-            return null;
+            throw new WrongIndexException();
         }
 
         return this.data[index];
     }
 
     @SuppressWarnings("unchecked")
-    public void removeAllWithValue(T value) {
+    public void removeAllWithValue(T value) throws NullNotAllowedException{
+        if(value == null){
+            throw new NullNotAllowedException();
+        }
 
         T[] newArray = (T[])new Object[data.length];
         int count = 0;
